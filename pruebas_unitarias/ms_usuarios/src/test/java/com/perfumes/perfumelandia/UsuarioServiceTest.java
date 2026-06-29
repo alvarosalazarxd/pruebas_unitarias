@@ -4,6 +4,7 @@ package com.perfumes.perfumelandia;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.ArgumentCaptor;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
@@ -183,4 +184,95 @@ class UsuarioServiceTest {
         assertThat(dto.getRol())
                 .isEqualTo(usuario.getRol());
     }
+    @Test
+        @DisplayName("obtenerUsuarioPorId: valida mapeo completo del DTO")
+        void obtenerUsuarioPorId_mapeaCorrectamente() {
+
+        Usuario usuario = TestDataFactory.crearUsuarioAleatorio();
+
+        when(usuarioRepository.findById(usuario.getId()))
+                .thenReturn(Optional.of(usuario));
+
+        UsuarioResponseDTO dto =
+                usuarioService.obtenerUsuarioPorId(usuario.getId());
+
+        assertThat(dto.getId()).isEqualTo(usuario.getId());
+        assertThat(dto.getNombre()).isEqualTo(usuario.getNombre());
+        assertThat(dto.getEmail()).isEqualTo(usuario.getEmail());
+        assertThat(dto.getRol()).isEqualTo(usuario.getRol());
+        assertThat(dto.getSucursal()).isEqualTo(usuario.getSucursal());
+        assertThat(dto.getActivo()).isEqualTo(usuario.getActivo());
+        }
+        @Test
+        @DisplayName("eliminarUsuario: llama deleteById exactamente una vez")
+        void eliminarUsuario_verificaLlamada() {
+
+        Long id = 1L;
+
+        usuarioService.eliminarUsuario(id);
+
+        verify(usuarioRepository, times(1)).deleteById(id);
+        verifyNoMoreInteractions(usuarioRepository);
+        }
+        @Test
+        @DisplayName("obtenerTodos: retorna lista vacía")
+        void obtenerTodos_listaVacia() {
+
+        when(usuarioRepository.findAll())
+                .thenReturn(java.util.List.of());
+
+        var resultado = usuarioService.obtenerTodos();
+
+        assertThat(resultado).isEmpty();
+        }
+                
+
+        @Test
+        @DisplayName("crearUsuario: verifica contenido del objeto enviado al save")
+        void crearUsuario_verificaContenidoUsuario() {
+
+        UsuarioRequestDTO dto = new UsuarioRequestDTO();
+        dto.setNombre("Pedro");
+        dto.setEmail("pedro@gmail.com");
+        dto.setContrasena("1234");
+        dto.setRol("USER");
+        dto.setActivo(true);
+        dto.setSucursal("Santiago");
+
+        when(usuarioRepository.save(any(Usuario.class)))
+                .thenAnswer(invocation -> invocation.getArgument(0));
+
+        usuarioService.crearUsuario(dto);
+
+        ArgumentCaptor<Usuario> captor =
+                ArgumentCaptor.forClass(Usuario.class);
+
+        verify(usuarioRepository).save(captor.capture());
+
+        Usuario usuarioGuardado = captor.getValue();
+
+        assertThat(usuarioGuardado.getNombre()).isEqualTo("Pedro");
+        assertThat(usuarioGuardado.getEmail()).isEqualTo("pedro@gmail.com");
+        }
+        @Test
+        public void testActualizarUsuarioExistente() {
+        // 1. Arrange: Prepara los datos
+        Long id = 1L;
+        UsuarioRequestDTO request = new UsuarioRequestDTO();
+        request.setNombre("Nuevo Nombre");
+        
+        Usuario usuarioExistente = new Usuario(); // 
+        usuarioExistente.setId(id);
+        
+        // Simulamos que el repositorio encuentra el usuario
+        when(usuarioRepository.findById(id)).thenReturn(Optional.of(usuarioExistente));
+        when(usuarioRepository.save(any(Usuario.class))).thenReturn(usuarioExistente);
+
+        // 2. Act: Llamas al método que está en rojo
+        usuarioService.actualizarUsuario(id, request);
+
+        // 3. Assert: Verificas que se llamó al guardado
+        verify(usuarioRepository, times(1)).save(any(Usuario.class));
+        }
+    
 }

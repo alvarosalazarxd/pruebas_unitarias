@@ -7,7 +7,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 import com.producto.ms_producto.dto.ProductoRequestDTO;
 import com.producto.ms_producto.dto.ProductoResponseDTO;
-import com.producto.ms_producto.model.Producto; // Asegúrate que este sea tu paquete de modelo
+import com.producto.ms_producto.model.Producto; 
 import com.producto.ms_producto.repository.ProductoRepository;
 import com.producto.ms_producto.service.impl.ProductoServiceImpl;
 

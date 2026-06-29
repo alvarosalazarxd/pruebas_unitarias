@@ -34,7 +34,7 @@ public class EnvioServiceTest {
         Envio entidadFalsa = new Envio(); 
         entidadFalsa.setId(idFalso);
 
-        // ¡IMPORTANTE! El 'when' se hace sobre el REPOSITORIO, no sobre el servicio
+       
         when(envioRepository.findById(idFalso)).thenReturn(Optional.of(entidadFalsa));
 
       

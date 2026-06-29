@@ -33,7 +33,7 @@ public class FavoritoServiceTest {
 
     @Test
     public void testGuardarFavorito() {
-        // Arrange
+       
         FavoritoDTO dtoEntrada = new FavoritoDTO();
         dtoEntrada.setUsuarioId(1L);
         dtoEntrada.setProductoId(10L);
@@ -44,17 +44,17 @@ public class FavoritoServiceTest {
 
         when(productoClient.buscarProducto(10L)).thenReturn(Optional.of(productoMock));
         
-        // Simulamos el guardado
+       
         Favorito favoritoGuardado = new Favorito();
         favoritoGuardado.setId(1L);
         favoritoGuardado.setNombreProducto("Perfume Dior");
         
         when(favoritoRepository.save(any(Favorito.class))).thenReturn(favoritoGuardado);
 
-        // Act
+        
         FavoritoDTO resultado = favoritoService.guardarFavorito(dtoEntrada);
 
-        // Assert
+       
         assertNotNull(resultado);
         assertEquals("Perfume Dior", resultado.getNombreProducto());
         verify(productoClient, times(1)).buscarProducto(10L);
