@@ -32,7 +32,8 @@ public class TestDataFactory {
     }
 
     public static Usuario crearUsuarioAleatorio() {
-    // Esto llama al método que ya configuramos con faker
-    return unUsuario(); 
-}
+        
+        return unUsuario(); 
+    }
+    
 }
