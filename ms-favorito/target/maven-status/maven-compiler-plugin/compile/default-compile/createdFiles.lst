@@ -1,0 +1,12 @@
+com\example\ms_favorito\exception\ResourceNotFoundException.class
+com\example\ms_favorito\repository\FavoritoRepository.class
+com\example\ms_favorito\config\WebClientConfig.class
+com\example\ms_favorito\controller\FavoritoController.class
+com\example\ms_favorito\dto\ProductoDTO.class
+com\example\ms_favorito\exception\GlobalExceptionHandler.class
+com\example\ms_favorito\client\ProductoClient.class
+com\example\ms_favorito\service\FavoritoService.class
+com\example\ms_favorito\MsFavoritoApplication.class
+com\example\ms_favorito\service\impl\FavoritoServiceImpl.class
+com\example\ms_favorito\dto\FavoritoDTO.class
+com\example\ms_favorito\model\Favorito.class
