@@ -1,2 +1,0 @@
-INSERT INTO envios (pedido_id, direccion, estado, codigo_seguimiento, transportista, fecha_envio) 
-VALUES (1, 'Av. Los Aromos 123, Santiago', 'EN_CAMINO', 'ENV-12345678', 'Chilexpress', CURRENT_TIMESTAMP);

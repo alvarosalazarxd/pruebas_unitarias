@@ -1,7 +1,0 @@
-GROUP,PACKAGE,CLASS,INSTRUCTION_MISSED,INSTRUCTION_COVERED,BRANCH_MISSED,BRANCH_COVERED,LINE_MISSED,LINE_COVERED,COMPLEXITY_MISSED,COMPLEXITY_COVERED,METHOD_MISSED,METHOD_COVERED
-ms_envios,com.envios.ms_envios,MsEnviosApplication,8,0,0,0,3,0,2,0,2,0
-ms_envios,com.envios.ms_envios.controller,EnvioController,57,0,0,0,18,0,9,0,9,0
-ms_envios,com.envios.ms_envios.exception,GlobalExceptionHandler,85,0,0,0,27,0,5,0,5,0
-ms_envios,com.envios.ms_envios.exception,ResourceNotFoundException,5,4,0,0,2,2,1,1,1,1
-ms_envios,com.envios.ms_envios.model,Envio,18,0,2,0,6,0,2,0,1,0
-ms_envios,com.envios.ms_envios.service.impl,EnvioServiceImpl,41,173,0,0,9,52,4,13,4,13
